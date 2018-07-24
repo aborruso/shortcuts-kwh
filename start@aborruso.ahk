@@ -1,23 +1,26 @@
-; "ALT + E" to have "È"
-!e::SendInput {È}
+; "ALT + E" to have "Ãˆ"
+!e::SendInput {Ãˆ}
 return
 
 ; "ALT + -" to have "~"
 !-::SendInput {~}
 return
 
-; "ALT + a" to have "À"
-!a::SendInput {À}
+; "ALT + a" to have "Ã€"
+!a::SendInput {Ã€}
 return
 
 ; "ALT + '" to have "`"
 !'::SendInput {``}
 return
 
-; "ALT + o" to have "Ò"
-!o::SendInput {Ò}
+; "ALT + o" to have "Ã’"
+!o::SendInput {Ã’}
 return
 
+; "ALT + u" to have "Ã™"
+!u::SendInput {Ã™}
+return
 
 ; "CTRL +ALT + '" to have "```"
     #NoEnv
