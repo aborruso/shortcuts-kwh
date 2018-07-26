@@ -28,23 +28,17 @@ Return
 !u::SendInput {U+00D9}
 Return
 
-; "CTRL +ALT + '" to have "```"
-    #NoEnv
-    #SingleInstance force
-Return
-
+;"CTRL +ALT + '" to have "```"
 ^!'::
-    SavedClip := ClipboardAll
-    Clipboard := "``````"
-    Send ^v
-    Clipboard := SavedClip
-    SavedClip := ""
+loop 3
+SendInput {U+0060}
 Return
 
 ; "CTRL +ALT + h" to have "This is an {#}example text"
-^!h::
-Sendinput,
-(
-This is an {#}example text
-)
-Return
+; The lines below are commented with ";", than "CTRL +ALT + h" does not work. Remove ";" to make it works
+;^!h::
+;Sendinput,
+;(
+;This is an {#}example text
+;)
+;Return
