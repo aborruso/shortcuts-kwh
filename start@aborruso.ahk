@@ -1,38 +1,31 @@
 #SingleInstance Force
 #installKeybdHook
 #Persistent
-<<<<<<< HEAD
-Return
-
-; "ALT + E" to have "È"
-!e::SendInput {È}
-Return
-=======
 Return ; 
 
+
 ; "ALT + E" to have "Ãˆ"
-!e::SendInput {Ãˆ}
+!e::SendInput {U+00C8} 
 return
->>>>>>> cb21a27a4c7f94a9e95f92029fe9f606d2b97677
 
 ; "ALT + -" to have "~"
 !-::SendInput {~}
 Return
 
-; "ALT + a" to have "À"
-!a::SendInput {À}
+; "ALT + a" to have "Ã€"
+!a::SendInput {U+00C0}
 Return
 
 ; "ALT + '" to have "`"
 !'::SendInput {``}
 Return
 
-; "ALT + o" to have "Ò"
-!o::SendInput {Ò}
+; "ALT + o" to have "Ã’"
+!o::SendInput {U+00D2}
 Return
 
-; "ALT + u" to have "Ù"
-!u::SendInput {Ù}
+; "ALT + u" to have "Ã™"
+!u::SendInput {U+00D9}
 Return
 
 ; "CTRL +ALT + '" to have "```"
@@ -46,17 +39,10 @@ Return
     Send ^v
     Clipboard := SavedClip
     SavedClip := ""
-<<<<<<< HEAD
 Return
 
 ; "CTRL +ALT + h" to have "This is an {#}example text"
 ^!h::
-=======
-return
-
-; Hotkey Shift + 1
-+1::
->>>>>>> cb21a27a4c7f94a9e95f92029fe9f606d2b97677
 Sendinput,
 (
 This is an {#}example text
