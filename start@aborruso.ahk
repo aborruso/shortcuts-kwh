@@ -34,11 +34,11 @@ loop 3
 SendInput {U+0060}
 Return
 
-; "CTRL +ALT + h" to have "This is an {#}example text"
+; "CTRL +ALT + h" to have "This is an example text"
 ; The lines below are commented with ";", than "CTRL +ALT + h" does not work. Remove ";" to make it works
 ;^!h::
 ;Sendinput,
 ;(
-;This is an {#}example text
+;This is an example text
 ;)
 ;Return
