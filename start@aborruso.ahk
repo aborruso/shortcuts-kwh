@@ -1,3 +1,8 @@
+#SingleInstance Force
+#installKeybdHook
+#Persistent
+Return ; 
+
 ; "ALT + E" to have "È"
 !e::SendInput {È}
 return
@@ -34,3 +39,11 @@ return
     Clipboard := SavedClip
     SavedClip := ""
 return
+
+; Hotkey Shift + 1
++1::
+Sendinput,
+(
+Testo d'esempio
+)
+Return
