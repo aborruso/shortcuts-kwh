@@ -44,6 +44,6 @@ return
 +1::
 Sendinput,
 (
-Testo d'esempio
+Thi is an {#}example text
 )
 Return
