@@ -3,21 +3,12 @@
 #Persistent
 Return
 
-
-; "ALT + E" to have "È"
-!e::SendInput {U+00C8} 
-Return
-
-; "ALT + -" to have "~"
-!-::SendInput {U+007E}
-Return
-
 ; "ALT + a" to have "À"
 !a::SendInput {U+00C0}
 Return
 
-; "ALT + '" to have "`"
-!'::SendInput {U+0060}
+; "ALT + E" to have "È"
+!e::SendInput {U+00C8} 
 Return
 
 ; "ALT + o" to have "Ò"
@@ -26,6 +17,14 @@ Return
 
 ; "ALT + u" to have "Ù"
 !u::SendInput {U+00D9}
+Return
+
+; "ALT + -" to have "~"
+!-::SendInput {U+007E}
+Return
+
+; "ALT + '" to have "`"
+!'::SendInput {U+0060}
 Return
 
 ;"CTRL +ALT + '" to have "```"
