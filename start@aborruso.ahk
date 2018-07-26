@@ -1,12 +1,12 @@
 #SingleInstance Force
 #installKeybdHook
 #Persistent
-Return ; 
+Return
 
 
 ; "ALT + E" to have "È"
 !e::SendInput {U+00C8} 
-return
+Return
 
 ; "ALT + -" to have "~"
 !-::SendInput {U+007E}
