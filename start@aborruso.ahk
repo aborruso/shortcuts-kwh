@@ -9,7 +9,7 @@ Return ;
 return
 
 ; "ALT + -" to have "~"
-!-::SendInput {~}
+!-::SendInput {U+007E}
 Return
 
 ; "ALT + a" to have "À"
@@ -17,7 +17,7 @@ Return
 Return
 
 ; "ALT + '" to have "`"
-!'::SendInput {``}
+!'::SendInput {U+0060}
 Return
 
 ; "ALT + o" to have "Ò"
