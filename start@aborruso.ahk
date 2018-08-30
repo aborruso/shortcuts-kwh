@@ -28,9 +28,7 @@ Return
 Return
 
 ;"CTRL +ALT + '" to have "```"
-^!'::
-loop 3
-SendInput {U+0060}
+^!'::SendInput {U+0060}{U+0060}{U+0060}
 Return
 
 ; "CTRL +ALT + h" to have "This is an example text"
