@@ -1,4 +1,4 @@
-#SingleInstance Force
+﻿#SingleInstance Force
 #installKeybdHook
 #Persistent
 Return
@@ -7,8 +7,8 @@ Return
 !a::SendInput {U+00C0}
 Return
 
-; "ALT + E" to have "È"
-!e::SendInput {U+00C8} 
+; ALT + E per avere È
+!è::SendInput {U+00C8}  
 Return
 
 ; "ALT + o" to have "Ò"
