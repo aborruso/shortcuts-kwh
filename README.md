@@ -2,6 +2,8 @@
 
 Windows keyboard shortcuts utility using AutoHotkey to enhance productivity with special character shortcuts and file creation utilities.
 
+**KWH** stands for **Keyboard shortcuts for "Windows habens"** (Latin for "Windows having/possessing").
+
 Specifically designed for Italian keyboard users and developers who need quick access to special characters and file operations.
 
 ## 🎯 Features
