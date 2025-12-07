@@ -185,35 +185,31 @@ fi
 if [[ "$COMPILE_EXE" == true ]]; then
     verbose_echo "Inizio compilazione eseguibile..."
     
-    # Verifica che compile.bat esista
-    if [[ ! -f "compile.bat" ]]; then
-        error_echo "File compile.bat non trovato"
+    # Verifica che compile.bat esista nella directory target
+    if [[ ! -f "$TARGET_DIR/compile.bat" ]]; then
+        error_echo "File compile.bat non trovato in $TARGET_DIR"
         exit 1
     fi
     
-    # Esegui compilazione in ambiente Windows
+    # Converti path WSL in path Windows
+    WIN_TARGET_DIR=$(wslpath -w "$TARGET_DIR")
+    verbose_echo "Directory Windows: $WIN_TARGET_DIR"
+    
+    # Esegui compilazione in ambiente Windows dalla directory corretta
     verbose_echo "Eseguo compile.bat..."
-    if cmd.exe /c compile.bat; then
+    if (cd "$TARGET_DIR" && cmd.exe /c compile.bat); then
         success_echo "Compilazione completata!"
         
-        # Copia anche l'eseguibile se è stato creato
-        if [[ -f "$EXE_FILE" ]]; then
-            verbose_echo "Copia eseguibile in target..."
-            EXE_TARGET="$TARGET_DIR/$EXE_FILE"
+        # L'eseguibile è già nella directory target, verifica solo che esista
+        EXE_TARGET="$TARGET_DIR/$EXE_FILE"
+        if [[ -f "$EXE_TARGET" ]]; then
+            success_echo "Eseguibile creato: $EXE_TARGET"
             
-            # Backup eseguibile esistente (se abilitato)
-            if [[ "$SKIP_BACKUP" == false ]] && [[ -f "$EXE_TARGET" ]]; then
-                EXE_BACKUP="${EXE_TARGET}.backup.$(date +%Y%m%d_%H%M%S)"
-                verbose_echo "Backup eseguibile esistente: $EXE_BACKUP"
-                cp "$EXE_TARGET" "$EXE_BACKUP"
-            fi
-            
-            # Copia nuovo eseguibile
-            if cp "$EXE_FILE" "$TARGET_DIR/"; then
-                success_echo "Eseguibile deployato: $EXE_TARGET"
-            else
-                error_echo "Copia eseguibile fallita"
-                exit 1
+            if [[ "$VERBOSE" == true ]]; then
+                echo ""
+                echo "Dettagli eseguibile:"
+                stat -c "  Dimensione: %s bytes" "$EXE_TARGET"
+                stat -c "  Modificato: %y" "$EXE_TARGET"
             fi
         else
             error_echo "Eseguibile non trovato dopo compilazione"
