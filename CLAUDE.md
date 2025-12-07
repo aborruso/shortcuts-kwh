@@ -16,3 +16,13 @@ Use `@/openspec/AGENTS.md` to learn:
 Keep this managed block so 'openspec update' can refresh the instructions.
 
 <!-- OPENSPEC:END -->
+
+# AutoHotkey Version
+
+**This project uses AutoHotkey v1**
+
+Important syntax differences from v2:
+- Use `StringLower, var, input` instead of `var := StrLower(input)`
+- Use `!` for ALT, `^` for CTRL, `#` for WIN, `+` for SHIFT
+- Character encoding must be ANSI/UTF-8 compatible
+- Italian special characters (è, à, ì, ò, ù) require scan codes (SC) syntax

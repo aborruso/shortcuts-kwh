@@ -22,6 +22,7 @@ Common characters and markdown helpers for developers:
 - `ALT + -` → **~** (tilde, for Unix paths and home directory)
 - `ALT + '` → **`** (backtick, for markdown inline code and shell commands)
 - `CTRL + ALT + '` → **```** (triple backticks, for markdown code blocks)
+- `CTRL + F12` → Convert clipboard text to snake_case and paste it
 
 ### File Creation Shortcuts
 Quick file operations in Windows Explorer (only work when Explorer or Desktop is active):
@@ -37,9 +38,26 @@ Quick file operations in Windows Explorer (only work when Explorer or Desktop is
 3. (Optional) Add to Windows Startup folder for automatic launch
 
 ### Option 2: Run from Source
-1. Install [AutoHotkey](https://www.autohotkey.com/)
+1. Install [AutoHotkey v1](https://www.autohotkey.com/download/ahk-install.exe) (**Note: Requires v1, not v2**)
 2. Double-click `start@aborruso.ahk` to run
 3. (Optional) Add to Windows Startup folder
+
+## 🚀 Deployment
+
+To deploy the script to the Windows filesystem (WSL environment):
+
+```bash
+./deploy.sh
+```
+
+**Options:**
+- `--help, -h` - Show help information
+- `--verbose, -v` - Verbose output with detailed information
+
+The script automatically:
+- Creates a backup of existing files
+- Verifies file integrity after copy
+- Provides clear success/error feedback
 
 ## 🔨 Compilation
 
@@ -50,7 +68,7 @@ compile.bat
 ```
 
 **Requirements:**
-- AutoHotkey must be installed
+- AutoHotkey v1 must be installed (**Note: v2 is not compatible**)
 - The script automatically finds `Ahk2Exe.exe` in standard installation locations
 
 ## 🛠️ Customization

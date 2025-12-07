@@ -1,4 +1,4 @@
-﻿; ================================================================
+; ================================================================
 ; AutoHotkey Shortcuts for Italian Keyboard & Developer Utilities
 ; ================================================================
 ; Author: @aborruso
@@ -15,32 +15,18 @@
 #Persistent
 Return
 
+; Scorciatoie italiane temporaneamente disabilitate per test
+; TODO: Risolvere problema codifica caratteri
 ; ALT + è per avere È
-!è::SendInput {U+00C8}
-Return
+; !è::SendInput {U+00C8}
+; Return
 
 ; ALT + - per avere ~
 !-::SendInput {U+007E}
 Return
 
-; ALT + à per avere À
-!à::SendInput {U+00C0}
-Return
-
-; ALT + ì per avere Ì
-!ì::SendInput {U+00CC}
-Return
-
 ; ALT + ' per avere `
 !'::SendInput {U+0060}
-Return
-
-; ALT + ò per avere Ò
-!ò::SendInput {U+00D2}
-Return
-
-; ALT + ù per avere Ù
-!ù::SendInput {U+00D9}
 Return
 
 ; ALT + e per avere ə, la schwa
@@ -50,6 +36,46 @@ Return
 ;CTRL +ALT + ' per avere ```
 ^!'::SendInput {U+0060}{U+0060}{U+0060}
 Return
+
+; CTRL + F12 per convertire testo in clipboard in snake_case e incollarlo
+^F12::
+    ; Leggi il testo dalla clipboard
+    clipboardText := Clipboard
+    
+    ; Se la clipboard è vuota, non fare nulla
+    if (clipboardText = "")
+        Return
+    
+    ; Converti in snake_case
+    snakeCaseText := ConvertToSnakeCase(clipboardText)
+    
+    ; Incolla il testo convertito
+    SendInput, %snakeCaseText%
+Return
+
+; Funzione per convertire testo in snake_case
+ConvertToSnakeCase(inputText) {
+    ; Converti tutto in minuscolo
+    StringLower, lowerText, inputText
+    
+    ; Sostituisci spazi, trattini e altri separatori comuni con underscore
+    ; Prima gestisci camelCase inserendo underscore prima delle lettere maiuscole
+    camelCaseHandled := RegExReplace(lowerText, "([a-z])([A-Z])", "$1_$2")
+    
+    ; Sostituisci spazi, trattini, punti e altri separatori con underscore
+    normalized := RegExReplace(camelCaseHandled, "[\s\-\.]+", "_")
+    
+    ; Rimuovi caratteri speciali non alfanumerici (eccetto underscore)
+    cleaned := RegExReplace(normalized, "[^a-z0-9_]", "")
+    
+    ; Gestisci underscore multipli consecutivi
+    singleUnderscore := RegExReplace(cleaned, "_+", "_")
+    
+    ; Rimuovi underscore all'inizio e alla fine
+    finalText := RegExReplace(singleUnderscore, "^_+|_+$", "")
+    
+    return finalText
+}
 
 ; Create a README.md file in the current Explorer folder, clicking CTRL + ALT + M
 !^m::

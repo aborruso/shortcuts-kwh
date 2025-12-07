@@ -454,3 +454,14 @@ openspec archive <change-id> [--yes|-y]  # Mark complete (add --yes for automati
 ```
 
 Remember: Specs are truth. Changes are proposals. Keep them in sync.
+
+## Project-Specific Notes
+
+### AutoHotkey Version
+**This project uses AutoHotkey v1** (NOT v2)
+
+Key syntax requirements:
+- String functions: `StringLower, var, input` NOT `var := StrLower(input)`
+- Hotkey modifiers: `!` (ALT), `^` (CTRL), `#` (WIN), `+` (SHIFT)
+- Italian special characters require scan codes due to encoding issues
+- File encoding: UTF-8 with BOM or ANSI for Windows compatibility

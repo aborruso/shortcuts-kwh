@@ -59,6 +59,9 @@ Windows keyboard shortcuts utility using AutoHotkey to enhance productivity with
 - `ALT + '` → ` (backtick, for markdown/shell)
 - `CTRL + ALT + '` → ``` (triple backticks, for markdown code blocks)
 
+### Text Transformation
+- `CTRL + F12` → Convert clipboard text to snake_case and paste it
+
 ### File Operations (Explorer/Desktop only)
 - `CTRL + ALT + M` → Create README.md in current folder and open it
 - `ALT + N` → Prompt for filename, create file in current folder
@@ -70,6 +73,12 @@ Windows keyboard shortcuts utility using AutoHotkey to enhance productivity with
 - Hotkeys must not conflict with system or common application shortcuts
 - File operations require Explorer/Desktop window to be active
 - Script filename pattern: `start@username.ahk` for personalization
+
+## Deployment
+- **Deployment Script**: `deploy.sh` automates copying script to Windows filesystem via WSL
+- **Target Directory**: `/mnt/c/github/shortcuts-kwh/` (Windows C: drive mapped in WSL)
+- **Backup Strategy**: Automatic backup of existing files with timestamp
+- **Error Handling**: Comprehensive validation and user feedback in Italian
 
 ## External Dependencies
 - Windows Shell Application COM object (`Shell.Application`)
