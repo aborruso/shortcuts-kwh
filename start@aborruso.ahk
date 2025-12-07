@@ -53,6 +53,31 @@ Return
     SendInput, %snakeCaseText%
 Return
 
+; WIN + SHIFT + F12 oppure CTRL + SHIFT + F12 per convertire testo in clipboard in kebab-case e incollarlo
+#+F12::
+^+F12::
+    ; Leggi il testo dalla clipboard
+    clipboardText := Clipboard
+
+    ; Se la clipboard è vuota, non fare nulla
+    if (clipboardText = "")
+        Return
+
+    ; Converti in kebab-case riusando snake_case (che è già stabile) e sostituendo gli underscore
+    kebabCaseText := ConvertToSnakeCase(clipboardText)
+    StringReplace, kebabCaseText, kebabCaseText, _, -, All
+
+    ; Se conversione vuota, segnala e interrompi
+    if (kebabCaseText = "") {
+        TrayTip, Shortcuts KWH, Conversione vuota dopo kebab-case, 1
+        Return
+    }
+
+    ; Incolla direttamente il testo convertito (senza usare la clipboard)
+    ; {Text} evita problemi con caratteri speciali e layout
+    SendInput, {Text}%kebabCaseText%
+Return
+
 ; Funzione per convertire testo in snake_case
 ConvertToSnakeCase(inputText) {
     ; Converti tutto in minuscolo
@@ -73,6 +98,30 @@ ConvertToSnakeCase(inputText) {
     
     ; Rimuovi underscore all'inizio e alla fine
     finalText := RegExReplace(singleUnderscore, "^_+|_+$", "")
+    
+    return finalText
+}
+
+; Funzione per convertire testo in kebab-case
+ConvertToKebabCase(inputText) {
+    ; Converti tutto in minuscolo
+    StringLower, lowerText, inputText
+    
+    ; Sostituisci spazi, underscore e altri separatori comuni con trattini
+    ; Prima gestisci camelCase inserendo trattini prima delle lettere maiuscole
+    camelCaseHandled := RegExReplace(lowerText, "([a-z])([A-Z])", "$1-$2")
+    
+    ; Sostituisci spazi, underscore, punti e altri separatori con trattini
+    normalized := RegExReplace(camelCaseHandled, "[\s\_\.\+]+", "-")
+    
+    ; Rimuovi caratteri speciali non alfanumerici (eccetto trattino)
+    cleaned := RegExReplace(normalized, "[^a-z0-9\-]", "")
+    
+    ; Gestisci trattini multipli consecutivi
+    singleDash := RegExReplace(cleaned, "-+", "-")
+    
+    ; Rimuovi trattini all'inizio e alla fine
+    finalText := RegExReplace(singleDash, "^-+|-$+", "")
     
     return finalText
 }
