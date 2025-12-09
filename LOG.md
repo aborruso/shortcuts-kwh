@@ -2,6 +2,7 @@
 
 ## 2025-12-09
 
+- Released v0.7: Remove custom tray menu (encoding issues with Italian chars)
 - Add help modal with CTRL+ALT+H shortcut and tray menu access
 - Add tray menu with Show Help, Reload Script, Exit options
 - Add Windows SmartScreen warning documentation to README
