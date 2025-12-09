@@ -46,6 +46,34 @@ Quick file operations in Windows Explorer (only work when Explorer or Desktop is
 2. Double-click `start@aborruso.ahk` to run
 3. (Optional) Add to Windows Startup folder
 
+### ⚠️ Windows SmartScreen Warning
+
+When running the `.exe` file for the first time, **Windows Defender SmartScreen may show a warning**:
+
+```
+Windows protected your PC
+Microsoft Defender SmartScreen prevented an unrecognized app from starting
+```
+
+**Why does this happen?**
+- The executable is **not digitally signed** (code signing certificates cost hundreds of euros per year)
+- The file has **low download reputation** (SmartScreen doesn't recognize new/uncommon files)
+- This is **normal for free, open-source tools**
+
+**How to proceed safely:**
+
+1. Click **"More info"** on the warning dialog
+2. Click **"Run anyway"** button that appears
+3. The script will run normally
+
+**Is it safe?**
+- ✅ **Source code is fully visible** in this repository (`start@aborruso.ahk`)
+- ✅ You can inspect the code before running
+- ✅ You can compile it yourself using `compile.bat`
+- ✅ **Alternative:** Use Option 2 (run `.ahk` source directly) to avoid the warning entirely
+
+**Note:** If you prefer to avoid the warning completely, use **Option 2** (Run from Source) instead of the pre-compiled executable.
+
 ## 🚀 Deployment
 
 To deploy the script to the Windows filesystem (WSL environment):

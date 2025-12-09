@@ -2,6 +2,7 @@
 
 ## 2025-12-09
 
+- Add Windows SmartScreen warning documentation to README
 - Released v0.6: CTRL+ALT+V paste cleanup & code fixes
 - Add CTRL+ALT+V shortcut (paste with newlines removed and spaces normalized)
 - Remove unused ConvertToKebabCase() function
