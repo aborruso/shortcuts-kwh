@@ -15,11 +15,26 @@
 #Persistent
 Return
 
-; Scorciatoie italiane temporaneamente disabilitate per test
-; TODO: Risolvere problema codifica caratteri
-; ALT + è per avere È
-; !è::SendInput {U+00C8}
-; Return
+; ALT + è per avere È (tasto dopo P sulla tastiera italiana)
+!SC01A::SendInput {U+00C8}
+Return
+
+; ALT + ò per avere Ò (tasto dopo L sulla tastiera italiana)
+!SC027::SendInput {U+00D2}
+Return
+
+; ALT + à per avere À (tasto dopo ò sulla tastiera italiana)
+!SC028::SendInput {U+00C0}
+Return
+
+; ALT + ù per avere Ù (tasto dopo ò, in basso)
+!SC02B::SendInput {U+00D9}
+Return
+
+; ALT + ì per avere Ì (provando con scan code diversi)
+; Sulla tastiera italiana, ì potrebbe essere SC00D o SC00C
+!SC00D::SendInput {U+00CC}
+Return
 
 ; ALT + - per avere ~
 !-::SendInput {U+007E}

@@ -25,6 +25,7 @@ Common characters and markdown helpers for developers:
 - `ALT + '` → **`** (backtick, for markdown inline code and shell commands)
 - `CTRL + ALT + '` → **```** (triple backticks, for markdown code blocks)
 - `CTRL + F12` → Convert clipboard text to snake_case and paste it
+- `WIN + SHIFT + F12` → Convert clipboard text to kebab-case and paste it
 
 ### File Creation Shortcuts
 Quick file operations in Windows Explorer (only work when Explorer or Desktop is active):
