@@ -14,33 +14,25 @@
 #installKeybdHook
 #Persistent
 
-; Configure tray menu
-Menu, Tray, NoStandard
-Menu, Tray, Add, Show Help / Mostra Shortcut, ShowHelpModal
-Menu, Tray, Add
-Menu, Tray, Add, Reload Script / Ricarica Script, ReloadScript
-Menu, Tray, Add, Exit / Esci, ExitScript
-Menu, Tray, Default, Show Help / Mostra Shortcut
-
 Return
 
-; ALT + e-grave -> E-grave uppercase (key after P on Italian keyboard)
+; ALT + è per avere È (tasto dopo P sulla tastiera italiana)
 !SC01A::SendInput {U+00C8}
 Return
 
-; ALT + o-grave -> O-grave uppercase (key after L on Italian keyboard)
+; ALT + ò per avere Ò (tasto dopo L sulla tastiera italiana)
 !SC027::SendInput {U+00D2}
 Return
 
-; ALT + a-grave -> A-grave uppercase (key after o-grave on Italian keyboard)
+; ALT + à per avere À (tasto dopo ò sulla tastiera italiana)
 !SC028::SendInput {U+00C0}
 Return
 
-; ALT + u-grave -> U-grave uppercase (bottom row after o-grave)
+; ALT + ù per avere Ù (tasto dopo ò, in basso)
 !SC02B::SendInput {U+00D9}
 Return
 
-; ALT + i-grave -> I-grave uppercase (scan code SC00D or SC00C on Italian keyboard)
+; ALT + ì per avere Ì (scan code SC00D o SC00C sulla tastiera italiana)
 !SC00D::SendInput {U+00CC}
 Return
 
@@ -260,12 +252,12 @@ ShowHelpModal:
 
     ; Add content
     Gui, Help:Add, Text, x20 y15 w560 cBlue, CARATTERI ITALIANI
-    Gui, Help:Add, Text, x30 y35 w560, ALT + è -> È (uppercase E grave)
-    Gui, Help:Add, Text, x30 y55 w560, ALT + à -> À (uppercase A grave)
-    Gui, Help:Add, Text, x30 y75 w560, ALT + ì -> Ì (uppercase I grave)
-    Gui, Help:Add, Text, x30 y95 w560, ALT + ò -> Ò (uppercase O grave)
-    Gui, Help:Add, Text, x30 y115 w560, ALT + ù -> Ù (uppercase U grave)
-    Gui, Help:Add, Text, x30 y135 w560, ALT + e -> ə (schwa)
+    Gui, Help:Add, Text, x30 y35 w560, ALT + SC01A (e-grave key) -> U+00C8 (E grave uppercase)
+    Gui, Help:Add, Text, x30 y55 w560, ALT + SC028 (a-grave key) -> U+00C0 (A grave uppercase)
+    Gui, Help:Add, Text, x30 y75 w560, ALT + SC00D (i-grave key) -> U+00CC (I grave uppercase)
+    Gui, Help:Add, Text, x30 y95 w560, ALT + SC027 (o-grave key) -> U+00D2 (O grave uppercase)
+    Gui, Help:Add, Text, x30 y115 w560, ALT + SC02B (u-grave key) -> U+00D9 (U grave uppercase)
+    Gui, Help:Add, Text, x30 y135 w560, ALT + e -> U+0259 (schwa)
 
     Gui, Help:Add, Text, x20 y165 w560 cBlue, DEVELOPER UTILITIES
     Gui, Help:Add, Text, x30 y185 w560, ALT + - -> ~ (tilde)
