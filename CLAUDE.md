@@ -67,16 +67,16 @@ Single-file architecture with three main sections:
    - `#installKeybdHook` - Keyboard hook for shortcuts
    - `#Persistent` - Keeps script running
 
-2. **Keyboard Shortcuts (lines 24-79)**
+2. **Keyboard Shortcuts (lines 24-95)**
    - Italian character shortcuts: ALT + è/à/ì/ò/ù → È/À/Ì/Ò/Ù
-   - Developer utilities: ALT + `-` → `~`, ALT + `'` → `` ` ``
+   - Developer utilities: ALT + `-` → `~`, ALT + `'` → `` ` ``, CTRL+ALT+' → `` ``` ``
+   - Clipboard utilities: CTRL+ALT+V (paste with newlines removed and spaces normalized)
    - Text transformation: CTRL+F12 (snake_case), WIN+SHIFT+F12 or CTRL+SHIFT+F12 (kebab-case)
 
-3. **Text Transformation Functions (lines 81-127)**
-   - `ConvertToSnakeCase()` - Converts text to snake_case
-   - `ConvertToKebabCase()` - Converts text to kebab-case (currently unused, kebab uses snake_case + replacement)
+3. **Text Transformation Functions (lines 107-129)**
+   - `ConvertToSnakeCase()` - Converts text to snake_case (also used for kebab-case with underscore replacement)
 
-4. **File Creation Utilities (lines 129-231)**
+4. **File Creation Utilities (lines 131-233)**
    - CTRL+ALT+M: Create README.md in current Explorer folder
    - ALT+N: Create new file with custom name
    - Uses COM objects to get Explorer window path

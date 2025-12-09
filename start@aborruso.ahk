@@ -52,6 +52,17 @@ Return
 ^!'::SendInput {U+0060}{U+0060}{U+0060}
 Return
 
+; CTRL+ALT+V per incollare testo rimuovendo a capo e doppi spazi
+^!v::
+    ClipSaved := ClipboardAll  ; Salva il contenuto attuale degli appunti
+    ; Sostituisce gli a capo con spazi e riduce i multi spazi a uno spazio singolo
+    Clipboard := RegExReplace(RegExReplace(Clipboard, "\r?\n", " "), " {2,}", " ")
+    Send ^v  ; Incolla il testo
+    Sleep 50  ; Piccola pausa per assicurare che il testo sia incollato
+    Clipboard := ClipSaved  ; Ripristina il contenuto originale degli appunti
+    ClipSaved :=  ; Pulisce la variabile temporanea
+Return
+
 ; CTRL + F12 per convertire testo in clipboard in snake_case e incollarlo
 ^F12::
     ; Leggi il testo dalla clipboard
@@ -117,30 +128,6 @@ ConvertToSnakeCase(inputText) {
     return finalText
 }
 
-; Funzione per convertire testo in kebab-case
-ConvertToKebabCase(inputText) {
-    ; Converti tutto in minuscolo
-    StringLower, lowerText, inputText
-    
-    ; Sostituisci spazi, underscore e altri separatori comuni con trattini
-    ; Prima gestisci camelCase inserendo trattini prima delle lettere maiuscole
-    camelCaseHandled := RegExReplace(lowerText, "([a-z])([A-Z])", "$1-$2")
-    
-    ; Sostituisci spazi, underscore, punti e altri separatori con trattini
-    normalized := RegExReplace(camelCaseHandled, "[\s\_\.\+]+", "-")
-    
-    ; Rimuovi caratteri speciali non alfanumerici (eccetto trattino)
-    cleaned := RegExReplace(normalized, "[^a-z0-9\-]", "")
-    
-    ; Gestisci trattini multipli consecutivi
-    singleDash := RegExReplace(cleaned, "-+", "-")
-    
-    ; Rimuovi trattini all'inizio e alla fine
-    finalText := RegExReplace(singleDash, "^-+|-$+", "")
-    
-    return finalText
-}
-
 ; Create a README.md file in the current Explorer folder, clicking CTRL + ALT + M
 !^m::
 if WinActive("ahk_class CabinetWClass") ; explorer
@@ -148,17 +135,19 @@ if WinActive("ahk_class CabinetWClass") ; explorer
     ; Get the path of the active Explorer window
     for window in ComObjCreate("Shell.Application").Windows
     {
-        if (window.HWND = WinExist("A"))
-        {
-            Fullpath := window.Document.Folder.Self.Path
-            break
+        try {
+            if (window.HWND = WinExist("A"))
+            {
+                Fullpath := window.Document.Folder.Self.Path
+                break
+            }
         }
     }
-    
+
     ; Check if README.md already exists
     if !FileExist(Fullpath . "\README.md")
         FileAppend,, %Fullpath%\README.md
-    
+
     Run, %Fullpath%\README.md
 }
 Return

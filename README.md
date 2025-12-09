@@ -24,6 +24,7 @@ Common characters and markdown helpers for developers:
 - `ALT + -` → **~** (tilde, for Unix paths and home directory)
 - `ALT + '` → **`** (backtick, for markdown inline code and shell commands)
 - `CTRL + ALT + '` → **```** (triple backticks, for markdown code blocks)
+- `CTRL + ALT + V` → Paste clipboard text with newlines removed and double spaces reduced to single space
 - `CTRL + F12` → Convert clipboard text to snake_case and paste it
 - `WIN + SHIFT + F12` → Convert clipboard text to kebab-case and paste it
 
