@@ -28,6 +28,10 @@ Common characters and markdown helpers for developers:
 - `CTRL + F12` → Convert clipboard text to snake_case and paste it
 - `WIN + SHIFT + F12` → Convert clipboard text to kebab-case and paste it
 
+### Help & Reference
+- `CTRL + ALT + H` → Show quick reference modal with all shortcuts
+- **Right-click** on tray icon → Access help menu
+
 ### File Creation Shortcuts
 Quick file operations in Windows Explorer (only work when Explorer or Desktop is active):
 

@@ -13,6 +13,15 @@
 #SingleInstance Force
 #installKeybdHook
 #Persistent
+
+; Configure tray menu
+Menu, Tray, NoStandard
+Menu, Tray, Add, Show Help / Mostra Shortcut, ShowHelpModal
+Menu, Tray, Add
+Menu, Tray, Add, Reload Script / Ricarica Script, ReloadScript
+Menu, Tray, Add, Exit / Esci, ExitScript
+Menu, Tray, Default, Show Help / Mostra Shortcut
+
 Return
 
 ; ALT + è per avere È (tasto dopo P sulla tastiera italiana)
@@ -233,3 +242,59 @@ Return
     Return
 
 #IfWinActive
+
+; ================================================================
+; Help Modal and Tray Menu Functions
+; ================================================================
+
+; CTRL+ALT+H to show help modal
+^!h::
+Gosub, ShowHelpModal
+Return
+
+; Show help modal with all shortcuts
+ShowHelpModal:
+    helpText := "
+    (
+════════════════════════════════════════════════════════
+              Shortcuts KWH - Quick Reference
+════════════════════════════════════════════════════════
+
+CARATTERI ITALIANI
+  ALT + è/à/ì/ò/ù     →  È / À / Ì / Ò / Ù
+  ALT + e             →  ə (schwa)
+
+DEVELOPER UTILITIES
+  ALT + -             →  ~ (tilde)
+  ALT + '             →  ` (backtick)
+  CTRL + ALT + '      →  ``` (triple backtick)
+  CTRL + ALT + V      →  Paste (clean text, no newlines)
+
+TEXT TRANSFORMATION
+  CTRL + F12          →  Convert to snake_case
+  CTRL + SHIFT + F12  →  Convert to kebab-case
+  WIN + SHIFT + F12   →  Convert to kebab-case
+
+FILE CREATION (Explorer/Desktop only)
+  CTRL + ALT + M      →  Create README.md
+  ALT + N             →  Create new file
+
+HELP
+  CTRL + ALT + H      →  Show this help
+  Right-click icon    →  Show menu
+
+════════════════════════════════════════════════════════
+                   Press OK to close
+    )"
+    MsgBox, 64, Shortcuts KWH Help, %helpText%
+Return
+
+; Reload script from tray menu
+ReloadScript:
+    Reload
+Return
+
+; Exit script from tray menu
+ExitScript:
+    ExitApp
+Return

@@ -62,25 +62,33 @@ Critical syntax differences:
 
 Single-file architecture with three main sections:
 
-1. **Initialization (lines 13-16)**
+1. **Initialization (lines 13-25)**
    - `#SingleInstance Force` - Prevents multiple instances
    - `#installKeybdHook` - Keyboard hook for shortcuts
    - `#Persistent` - Keeps script running
+   - Tray menu configuration with Help, Reload, Exit options
 
-2. **Keyboard Shortcuts (lines 24-95)**
+2. **Keyboard Shortcuts (lines 27-106)**
    - Italian character shortcuts: ALT + è/à/ì/ò/ù → È/À/Ì/Ò/Ù
    - Developer utilities: ALT + `-` → `~`, ALT + `'` → `` ` ``, CTRL+ALT+' → `` ``` ``
    - Clipboard utilities: CTRL+ALT+V (paste with newlines removed and spaces normalized)
    - Text transformation: CTRL+F12 (snake_case), WIN+SHIFT+F12 or CTRL+SHIFT+F12 (kebab-case)
+   - Help modal: CTRL+ALT+H (shows quick reference)
 
-3. **Text Transformation Functions (lines 107-129)**
+3. **Text Transformation Functions (lines 108-130)**
    - `ConvertToSnakeCase()` - Converts text to snake_case (also used for kebab-case with underscore replacement)
 
-4. **File Creation Utilities (lines 131-233)**
+4. **File Creation Utilities (lines 132-244)**
    - CTRL+ALT+M: Create README.md in current Explorer folder
    - ALT+N: Create new file with custom name
    - Uses COM objects to get Explorer window path
    - Only works when Explorer or Desktop is active (`#IfWinActive`)
+
+5. **Help Modal and Tray Functions (lines 246-300)**
+   - ShowHelpModal: Displays quick reference with all shortcuts
+   - ReloadScript: Reloads the script from tray menu
+   - ExitScript: Exits the application from tray menu
+   - CTRL+ALT+H shortcut and tray right-click access help
 
 ### Key Technical Patterns
 
