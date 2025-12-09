@@ -24,24 +24,23 @@ Menu, Tray, Default, Show Help / Mostra Shortcut
 
 Return
 
-; ALT + è per avere È (tasto dopo P sulla tastiera italiana)
+; ALT + e-grave -> E-grave uppercase (key after P on Italian keyboard)
 !SC01A::SendInput {U+00C8}
 Return
 
-; ALT + ò per avere Ò (tasto dopo L sulla tastiera italiana)
+; ALT + o-grave -> O-grave uppercase (key after L on Italian keyboard)
 !SC027::SendInput {U+00D2}
 Return
 
-; ALT + à per avere À (tasto dopo ò sulla tastiera italiana)
+; ALT + a-grave -> A-grave uppercase (key after o-grave on Italian keyboard)
 !SC028::SendInput {U+00C0}
 Return
 
-; ALT + ù per avere Ù (tasto dopo ò, in basso)
+; ALT + u-grave -> U-grave uppercase (bottom row after o-grave)
 !SC02B::SendInput {U+00D9}
 Return
 
-; ALT + ì per avere Ì (provando con scan code diversi)
-; Sulla tastiera italiana, ì potrebbe essere SC00D o SC00C
+; ALT + i-grave -> I-grave uppercase (scan code SC00D or SC00C on Italian keyboard)
 !SC00D::SendInput {U+00CC}
 Return
 
@@ -254,39 +253,49 @@ Return
 
 ; Show help modal with all shortcuts
 ShowHelpModal:
-    helpText := "
-    (
-════════════════════════════════════════════════════════
-              Shortcuts KWH - Quick Reference
-════════════════════════════════════════════════════════
+    ; Create GUI window
+    Gui, Help:New, +AlwaysOnTop +ToolWindow, Shortcuts KWH - Quick Reference
+    Gui, Help:Font, s10, Segoe UI
+    Gui, Help:Color, White
 
-CARATTERI ITALIANI
-  ALT + è/à/ì/ò/ù     →  È / À / Ì / Ò / Ù
-  ALT + e             →  ə (schwa)
+    ; Add content
+    Gui, Help:Add, Text, x20 y15 w560 cBlue, CARATTERI ITALIANI
+    Gui, Help:Add, Text, x30 y35 w560, ALT + è -> È (uppercase E grave)
+    Gui, Help:Add, Text, x30 y55 w560, ALT + à -> À (uppercase A grave)
+    Gui, Help:Add, Text, x30 y75 w560, ALT + ì -> Ì (uppercase I grave)
+    Gui, Help:Add, Text, x30 y95 w560, ALT + ò -> Ò (uppercase O grave)
+    Gui, Help:Add, Text, x30 y115 w560, ALT + ù -> Ù (uppercase U grave)
+    Gui, Help:Add, Text, x30 y135 w560, ALT + e -> ə (schwa)
 
-DEVELOPER UTILITIES
-  ALT + -             →  ~ (tilde)
-  ALT + '             →  ` (backtick)
-  CTRL + ALT + '      →  ``` (triple backtick)
-  CTRL + ALT + V      →  Paste (clean text, no newlines)
+    Gui, Help:Add, Text, x20 y165 w560 cBlue, DEVELOPER UTILITIES
+    Gui, Help:Add, Text, x30 y185 w560, ALT + - -> ~ (tilde)
+    Gui, Help:Add, Text, x30 y205 w560, ALT + ' -> ` (backtick)
+    Gui, Help:Add, Text, x30 y225 w560, CTRL + ALT + ' -> ``` (triple backtick)
+    Gui, Help:Add, Text, x30 y245 w560, CTRL + ALT + V -> Paste clean text (no newlines)
 
-TEXT TRANSFORMATION
-  CTRL + F12          →  Convert to snake_case
-  CTRL + SHIFT + F12  →  Convert to kebab-case
-  WIN + SHIFT + F12   →  Convert to kebab-case
+    Gui, Help:Add, Text, x20 y275 w560 cBlue, TEXT TRANSFORMATION
+    Gui, Help:Add, Text, x30 y295 w560, CTRL + F12 -> Convert to snake_case
+    Gui, Help:Add, Text, x30 y315 w560, CTRL + SHIFT + F12 -> Convert to kebab-case
+    Gui, Help:Add, Text, x30 y335 w560, WIN + SHIFT + F12 -> Convert to kebab-case
 
-FILE CREATION (Explorer/Desktop only)
-  CTRL + ALT + M      →  Create README.md
-  ALT + N             →  Create new file
+    Gui, Help:Add, Text, x20 y365 w560 cBlue, FILE CREATION (Explorer/Desktop only)
+    Gui, Help:Add, Text, x30 y385 w560, CTRL + ALT + M -> Create README.md
+    Gui, Help:Add, Text, x30 y405 w560, ALT + N -> Create new file
 
-HELP
-  CTRL + ALT + H      →  Show this help
-  Right-click icon    →  Show menu
+    Gui, Help:Add, Text, x20 y435 w560 cBlue, HELP
+    Gui, Help:Add, Text, x30 y455 w560, CTRL + ALT + H -> Show this help
+    Gui, Help:Add, Text, x30 y475 w560, Right-click icon -> Show menu
 
-════════════════════════════════════════════════════════
-                   Press OK to close
-    )"
-    MsgBox, 64, Shortcuts KWH Help, %helpText%
+    ; Add Close button
+    Gui, Help:Add, Button, x250 y510 w100 h30 gHelpGuiClose, Close
+
+    ; Show GUI
+    Gui, Help:Show, w600 h560
+Return
+
+HelpGuiClose:
+HelpGuiEscape:
+    Gui, Help:Destroy
 Return
 
 ; Reload script from tray menu
