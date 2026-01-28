@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Shortcuts KWH: AutoHotkey utilities for Italian keyboards, dev-friendly glyphs, and fast file creation." />
+  <title>Shortcuts KWH — AutoHotkey Power Tricks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0b0f14;
+      --paper: #f4f1ea;
+      --aqua: #2be4c6;
+      --acid: #b4ff3a;
+      --ember: #ff6b3d;
+      --night: #0f1a24;
+      --line: #1e2b38;
+      --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --sans: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --display: "Chakra Petch", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --grid: rgba(15, 26, 36, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background: radial-gradient(1200px 800px at 10% -10%, #fef7d8 0%, #f5e4b6 30%, var(--paper) 70%),
+                  linear-gradient(180deg, #fdf8ef 0%, #f1efe8 100%);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 120px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      font-family: var(--display);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 14px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      background: #ffffffcc;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 6px 18px rgba(15, 26, 36, 0.08);
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--night);
+      border-bottom: 1px dashed transparent;
+      padding-bottom: 4px;
+    }
+
+    nav a:hover { border-bottom-color: var(--ember); }
+
+    .hero {
+      margin-top: 64px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+      align-items: center;
+    }
+
+    .headline {
+      font-family: var(--display);
+      font-size: clamp(2.6rem, 4vw, 4.2rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+      line-height: 1.05;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin: 0 0 28px;
+      color: #1f2b34;
+    }
+
+    .cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 12px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--night);
+      color: #f5f7f9;
+      text-decoration: none;
+      box-shadow: 0 12px 24px rgba(15, 26, 36, 0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button.secondary {
+      background: #ffffff;
+      color: var(--night);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(15, 26, 36, 0.22);
+    }
+
+    .hero-card {
+      background: #ffffffd9;
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 60px rgba(15, 26, 36, 0.2);
+      padding: 24px;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(43, 228, 198, 0.12), rgba(255, 107, 61, 0.08));
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .hero-card h3 {
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin: 0 0 12px;
+      color: #24313e;
+    }
+
+    .kbd-list {
+      display: grid;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    .kbd-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px dashed rgba(15, 26, 36, 0.2);
+      padding-bottom: 8px;
+    }
+
+    .kbd-line span:last-child {
+      color: #1f2b34;
+      font-weight: 600;
+    }
+
+    section {
+      margin-top: 96px;
+    }
+
+    .section-title {
+      font-family: var(--display);
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 14px 30px rgba(15, 26, 36, 0.12);
+    }
+
+    .card h4 {
+      margin: 0 0 10px;
+      font-family: var(--display);
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--acid);
+      color: #0c1207;
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+
+    .spec {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: #0f1a24;
+      color: #c9f7ff;
+      padding: 18px;
+      border-radius: 12px;
+      overflow-x: auto;
+      border: 1px solid #1f2f3a;
+    }
+
+    .spec code { color: #b4ff3a; }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #ffffff;
+    }
+
+    footer {
+      margin-top: 100px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: #32404c;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 700px) {
+      nav { display: none; }
+      .hero { margin-top: 40px; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="wrap">
+    <header>
+      <div class="logo">Shortcuts KWH</div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#stack">Stack</a>
+        <a href="#shortcuts">Shortcuts</a>
+        <a href="#install">Install</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1 class="headline">Autohotkey rituals for the Italian keyboard nerd.</h1>
+        <p class="lead">Shortcuts KWH is a single-file AutoHotkey v1 utility that turns awkward keys into instant glyphs, powers clipboard transforms, and spawns files in Explorer without breaking flow. Built for Windows power users who want keystrokes that feel like spells.</p>
+        <div class="cta">
+          <a class="button" href="#install">Get Running</a>
+          <a class="button secondary" href="#shortcuts">See Hotkeys</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Quick Signal</h3>
+        <div class="kbd-list">
+          <div class="kbd-line"><span>ALT + &egrave;</span><span>&Egrave;</span></div>
+          <div class="kbd-line"><span>ALT + e</span><span>&#601;</span></div>
+          <div class="kbd-line"><span>CTRL + ALT + V</span><span>clean paste</span></div>
+          <div class="kbd-line"><span>CTRL + F12</span><span>snake_case</span></div>
+          <div class="kbd-line"><span>ALT + N</span><span>new file</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="reveal">
+      <div class="section-title">Why nerds care</div>
+      <div class="grid">
+        <div class="card">
+          <div class="tag">Italian layout</div>
+          <h4>Accents on demand</h4>
+          <p>Uppercase accents are buried on Italian keyboards. KWH maps the scan codes directly so &Egrave;, &Agrave;, &Igrave;, &Ograve;, &Ugrave; are one hit away.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Dev flow</div>
+          <h4>Markdown + shell speed</h4>
+          <p>Tilde, backticks, triple backticks, and clipboard transforms are bound to muscle-memory combos designed for docs, terminals, and code reviews.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Explorer hacks</div>
+          <h4>Spawn files instantly</h4>
+          <p>Create README.md or a custom file right where Explorer is focused. No dialogs, no context switches, just new files and immediate open.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack" class="reveal">
+      <div class="section-title">Stack + conventions</div>
+      <div class="grid">
+        <div class="card">
+          <h4>Tech stack</h4>
+          <div class="pill-list">
+            <span class="pill">AutoHotkey v1</span>
+            <span class="pill">Shell.Application COM</span>
+            <span class="pill">Ahk2Exe compile</span>
+            <span class="pill">WSL deploy.sh</span>
+          </div>
+        </div>
+        <div class="card">
+          <h4>Conventions</h4>
+          <ul>
+            <li>Scan codes for Italian special keys.</li>
+            <li>SendInput with Unicode {U+XXXX} glyphs.</li>
+            <li>#SingleInstance + #Persistent with keyboard hook.</li>
+            <li>Explorer-only hotkeys via #IfWinActive.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="shortcuts" class="reveal">
+      <div class="section-title">Shortcut map</div>
+      <div class="spec">
+        <div><code>ALT + &egrave;</code>  -> &Egrave;</div>
+        <div><code>ALT + &agrave;</code>  -> &Agrave;</div>
+        <div><code>ALT + &igrave;</code>  -> &Igrave;</div>
+        <div><code>ALT + &ograve;</code>  -> &Ograve;</div>
+        <div><code>ALT + &ugrave;</code>  -> &Ugrave;</div>
+        <div><code>ALT + e</code>         -> &#601; (schwa)</div>
+        <div><code>ALT + -</code>         -> ~</div>
+        <div><code>ALT + '</code>         -> `</div>
+        <div><code>CTRL + ALT + '</code>  -> ```</div>
+        <div><code>CTRL + ALT + V</code>  -> clean paste</div>
+        <div><code>CTRL + F12</code>      -> snake_case</div>
+        <div><code>CTRL + SHIFT + F12</code> -> kebab-case</div>
+        <div><code>WIN + SHIFT + F12</code>  -> kebab-case</div>
+        <div><code>CTRL + ALT + M</code>  -> create README.md</div>
+        <div><code>ALT + N</code>         -> new file dialog</div>
+        <div><code>CTRL + ALT + H</code>  -> help modal</div>
+      </div>
+    </section>
+
+    <section id="install" class="reveal">
+      <div class="section-title">Install + deploy</div>
+      <div class="grid">
+        <div class="card">
+          <h4>Run from source</h4>
+          <p>Install AutoHotkey v1, then run <span class="pill">start@aborruso.ahk</span>. Add it to Startup to keep it resident.</p>
+        </div>
+        <div class="card">
+          <h4>Compile</h4>
+          <p>Use <span class="pill">compile.bat</span> to build a standalone EXE with Ahk2Exe. SmartScreen warnings are expected for unsigned binaries.</p>
+        </div>
+        <div class="card">
+          <h4>WSL deploy</h4>
+          <p>Run <span class="pill">./deploy.sh</span> to copy to Windows, with backup + integrity checks. Ideal for WSL-driven workflows.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Made for Italian layouts + nerd workflows.</span>
+      <span>Publish-ready for GitHub Pages under /website.</span>
+    </footer>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
