@@ -2,6 +2,9 @@
 
 ## 2025-12-09
 
+- Open issue #8: VoiceAccess.exe not closing with TASKKILL command
+- Fix VoiceAccess: close process with TASKKILL (bar cannot be hidden/minimized, only closed)
+- Remove debug logging (voiceaccess_debug.log)
 - Released v0.7: Remove custom tray menu (encoding issues with Italian chars)
 - Add help modal with CTRL+ALT+H shortcut and tray menu access
 - Add tray menu with Show Help, Reload Script, Exit options
