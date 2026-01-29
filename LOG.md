@@ -1,5 +1,9 @@
 # LOG
 
+## 2026-01-29
+
+- Website: add step-by-step install + EXE release link
+
 ## 2025-12-09
 
 - Open issue #8: VoiceAccess.exe not closing with TASKKILL command
